@@ -30,8 +30,13 @@ struct SearchScreen: View {
                         trendingResultsView
                     } else {
                         Text("showing results for \"\(viewModel.searchText)\"")
-                            .foregroundStyle(.white)
                             .italic()
+                        
+                        if viewModel.searchResults.isEmpty && !viewModel.searching {
+                            Text("No results. Try again.")
+                                .font(.system(size: 20.0, weight: .medium))
+                                .padding(.vertical, 24.0)
+                        }
                         
                         searchResultsView
                     }
@@ -42,6 +47,8 @@ struct SearchScreen: View {
                     
                     Spacer(minLength: 45.0)
                 }
+                .scrollDismissesKeyboard(.immediately)
+                .foregroundStyle(.white)
             }
             .background(Color.mint)
             .task {

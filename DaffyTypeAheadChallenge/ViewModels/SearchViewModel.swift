@@ -38,6 +38,7 @@ class SearchViewModel: ObservableObject {
     func search(_ text: String) {
         //Clears any pending requests.
         cancellables.removeAll()
+        searching = true
         
         guard !text.isEmpty else {
             searchResults = []
